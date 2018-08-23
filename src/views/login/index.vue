@@ -5,7 +5,6 @@
 
       <div class="title-container">
         <h3 class="title">{{ $t('login.title') }}</h3>
-        <lang-select class="set-language"/>
       </div>
 
       <el-form-item prop="username">
@@ -41,11 +40,11 @@
 
       <div class="tips">
         <span>{{ $t('login.username') }} : admin</span>
-        <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
+        <!--<span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>-->
       </div>
       <div class="tips">
         <span style="margin-right:18px;">{{ $t('login.username') }} : editor</span>
-        <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
+        <!--<span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>-->
       </div>
 
       <el-button class="thirdparty-button" type="primary" @click="showDialog=true">{{ $t('login.thirdparty') }}</el-button>
@@ -88,7 +87,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '1111111'
+        password: '000000'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -212,7 +211,7 @@ $light_gray:#eee;
     position: absolute;
     left: 0;
     right: 0;
-    width: 520px;
+    width: 380px;
     padding: 35px 35px 15px 35px;
     margin: 120px auto;
   }

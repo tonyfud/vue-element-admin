@@ -8,6 +8,7 @@ const chartsRouter = {
   redirect: 'noredirect',
   name: 'Charts',
   meta: {
+    roles: ['admin'],
     title: 'charts',
     icon: 'chart'
   },

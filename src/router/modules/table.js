@@ -8,6 +8,7 @@ const tableRouter = {
   redirect: '/table/complex-table',
   name: 'Table',
   meta: {
+    roles: ['admin'],
     title: 'Table',
     icon: 'table'
   },

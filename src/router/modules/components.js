@@ -8,6 +8,7 @@ const componentsRouter = {
   redirect: 'noredirect',
   name: 'ComponentDemo',
   meta: {
+    roles: ['admin'],
     title: 'components',
     icon: 'component'
   },

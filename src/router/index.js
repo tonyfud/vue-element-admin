@@ -66,19 +66,6 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/documentation',
-    component: Layout,
-    redirect: '/documentation/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/documentation/index'),
-        name: 'Documentation',
-        meta: { title: 'documentation', icon: 'documentation', noCache: true }
-      }
-    ]
-  },
-  {
     path: '/guide',
     component: Layout,
     redirect: '/guide/index',
@@ -100,6 +87,22 @@ export default new Router({
 })
 
 export const asyncRouterMap = [
+  {
+    path: '/documentation',
+    component: Layout,
+    redirect: '/documentation/index',
+    meta: {
+      roles: ['admin']
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/documentation/index'),
+        name: 'Documentation',
+        meta: { title: 'documentation', icon: 'documentation', noCache: true }
+      }
+    ]
+  },
   mytableRouter,
   {
     path: '/permission',
@@ -107,9 +110,9 @@ export const asyncRouterMap = [
     redirect: '/permission/index',
     alwaysShow: true, // will always show the root menu
     meta: {
+      roles: ['admin'],
       title: 'permission',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      icon: 'lock'
     },
     children: [
       {
@@ -136,12 +139,17 @@ export const asyncRouterMap = [
   {
     path: '/icon',
     component: Layout,
+    meta: {
+      title: 'icons',
+      icon: 'icon',
+      roles: ['admin']
+    },
     children: [
       {
         path: 'index',
         component: () => import('@/views/svg-icons/index'),
         name: 'Icons',
-        meta: { title: 'icons', icon: 'icon', noCache: true }
+        meta: { title: 'icons', icon: 'icon', noCache: true, roles: ['admin'] }
       }
     ]
   },
@@ -151,13 +159,13 @@ export const asyncRouterMap = [
   chartsRouter,
   nestedRouter,
   tableRouter,
-
   {
     path: '/example',
     component: Layout,
     redirect: '/example/list',
     name: 'Example',
     meta: {
+      roles: ['admin'],
       title: 'example',
       icon: 'example'
     },
@@ -187,6 +195,7 @@ export const asyncRouterMap = [
   {
     path: '/tab',
     component: Layout,
+    meta: { roles: ['admin'] },
     children: [
       {
         path: 'index',
@@ -203,6 +212,7 @@ export const asyncRouterMap = [
     redirect: 'noredirect',
     name: 'ErrorPages',
     meta: {
+      roles: ['admin'],
       title: 'errorPages',
       icon: '404'
     },
@@ -226,6 +236,7 @@ export const asyncRouterMap = [
     path: '/error-log',
     component: Layout,
     redirect: 'noredirect',
+    meta: { roles: ['admin'] },
     children: [
       {
         path: 'log',
@@ -242,6 +253,7 @@ export const asyncRouterMap = [
     redirect: '/excel/export-excel',
     name: 'Excel',
     meta: {
+      roles: ['admin'],
       title: 'excel',
       icon: 'excel'
     },
@@ -272,7 +284,11 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: '/zip/download',
     alwaysShow: true,
-    meta: { title: 'zip', icon: 'zip' },
+    meta: {
+      roles: ['admin'],
+      title: 'zip',
+      icon: 'zip'
+    },
     children: [
       {
         path: 'download',
@@ -287,6 +303,7 @@ export const asyncRouterMap = [
     path: '/theme',
     component: Layout,
     redirect: 'noredirect',
+    meta: { roles: ['admin'] },
     children: [
       {
         path: 'index',
@@ -301,6 +318,7 @@ export const asyncRouterMap = [
     path: '/clipboard',
     component: Layout,
     redirect: 'noredirect',
+    meta: { roles: ['admin'] },
     children: [
       {
         path: 'index',
@@ -314,6 +332,7 @@ export const asyncRouterMap = [
   {
     path: '/i18n',
     component: Layout,
+    meta: { roles: ['admin'] },
     children: [
       {
         path: 'index',

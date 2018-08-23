@@ -8,6 +8,7 @@ const mytableRouter = {
   redirect: '/table/mytable',
   name: 'mytable',
   meta: {
+    roles: ['admin'],
     title: 'mytable',
     icon: 'table'
   },
