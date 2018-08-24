@@ -9,9 +9,7 @@ export function getLog(query) {
 }
 
 export function singleCleanCache(server) {
-  const data = {
-    server
-  }
+  const data = { server }
   return request({
     url: 'http://localhost:8080/api/singleCleanCache',
     method: 'POST',
@@ -20,9 +18,7 @@ export function singleCleanCache(server) {
 }
 
 export function muiltCleanCache(servers) {
-  const data = {
-    servers
-  }
+  const data = { servers }
   return request({
     url: 'http://localhost:8080/api/muiltCleanCache',
     method: 'POST',

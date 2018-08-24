@@ -8,8 +8,8 @@ const mytableRouter = {
   redirect: '/table/mytable',
   name: 'mytable',
   meta: {
-    roles: ['admin'],
-    title: 'mytable',
+    roles: ['admin', 'editor'],
+    title: '常用功能',
     icon: 'table'
   },
   children: [
@@ -17,19 +17,13 @@ const mytableRouter = {
       path: 'mytable0',
       component: () => import('@/views/table/mytable'),
       name: 'mytable0',
-      meta: { title: 'mytable', icon: 'table' }
+      meta: { title: '缓存清理', icon: 'table' }
     },
     {
       path: 'mytable1',
       component: () => import('@/views/table/mytable'),
       name: 'mytable1',
-      meta: { title: 'mytable-1', icon: 'table' }
-    },
-    {
-      path: 'mytable2',
-      component: () => import('@/views/table/mytable'),
-      name: 'mytable2',
-      meta: { title: 'mytable-2', icon: 'table' }
+      meta: { title: 'CDN清理', icon: 'table' }
     }
   ]
 }

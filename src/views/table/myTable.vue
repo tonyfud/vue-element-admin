@@ -9,26 +9,27 @@
               v-for="item in singleServersOptions"
               :key="item.key"
               :label="item.display_name"
-              :value="item.key">
+              :value="item.display_name">
               <span style="float: left">{{ item.display_name }}</span>
               <span style="float: right; color: #8492a6; font-size: 13px">{{ item.key }}</span>
             </el-option>
           </el-select>
-          <el-button v-waves class="filter-item" type="success" icon="el-icon-success" @click="singleOpenMsgbox">清理单台缓存</el-button>
+          <el-button v-waves class="filter-item" type="success" icon="el-icon-success" style="margin-left: 10px; margin-bottom: 10px;" @click="singleOpenMsgbox">清理单台缓存</el-button>
         </el-tab-pane>
         <el-tab-pane>
           <span slot="label"><i class="el-icon-date"> 批量清理</i></span>
-          <div style="line-height:300%; margin:0px 0px 0px 0px;">
-            <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" border fill="#0000FF" @change="handleCheckAllChange">全选</el-checkbox>
+          <div style="line-height:300%;" >
+            <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" border fill="#0000FF" style="margin-left: 10px; margin-bottom: 10px;" @change="handleCheckAllChange">全选</el-checkbox>
             <el-checkbox-group v-model="checkboxGroup1" @change="handleCheckedChange">
               <el-checkbox
                 v-for="server in servers"
                 :label="server"
                 :key="server"
+                style="margin-left: 10px; margin-bottom: 10px;"
                 border>{{ server }}
               </el-checkbox>
             </el-checkbox-group>
-            <el-button v-waves type="warning" icon="el-icon-share" @click="muiltOpenMsgbox">批量清理缓存</el-button>
+            <el-button v-waves type="warning" icon="el-icon-share" style="margin-left: 10px; margin-bottom: 10px;" @click="muiltOpenMsgbox">批量清理缓存</el-button>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -88,12 +89,6 @@ const singleServersOptions = [
   { key: 'app', display_name: 'app.lifevc.com' }
 ]
 
-// arr to obj ,such as { CN : "China", US : "USA" }
-const singleServersKeyValue = singleServersOptions.reduce((acc, cur) => {
-  acc[cur.key] = cur.display_name
-  return acc
-}, {})
-
 export default {
   directives: {
     waves
@@ -109,9 +104,6 @@ export default {
       }
       // alert(statusMap[status])
       return statusMap[status]
-    },
-    typeFilter(type) {
-      return singleServersKeyValue[type]
     }
   },
   data() {
@@ -132,6 +124,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
+      alert(JSON.stringify({ name }))
       // alert(JSON.stringify(this.listQuery))
       getLog(this.listQuery).then(response => {
         this.list = response.data.data.items
@@ -142,7 +135,7 @@ export default {
     listCleanCache() {
       // const tempData = Object.assign({}, this.listQuery)
       this.listLoading = true
-      // alert(JSON.stringify(this.listQuery))
+      // alert(JSON.stringify(tempData))
       singleCleanCache(this.listQuery).then(response => {
         this.list = response.data.data.items
         // alert(JSON.stringify(response))
