@@ -78,6 +78,7 @@
 <script>
 import { getLog, singleCleanCache, muiltCleanCache } from '@/api/tabletest'
 import waves from '@/directive/waves'
+import { mapGetters } from 'vuex'
 
 const serverOptions = ['m.lifevc.com', 'www.lifevc.com', 'account.lifevc.com', 'marketing.lifevc.com', 'app.lifevc.com']
 
@@ -118,13 +119,19 @@ export default {
       singleServersOptions
     }
   },
+  computed: {
+    ...mapGetters([
+      'name',
+      'roles'
+    ])
+  },
   created() {
     this.fetchData()
   },
   methods: {
     fetchData() {
       this.listLoading = true
-      alert(JSON.stringify({ name }))
+      alert(JSON.stringify(this.name))
       // alert(JSON.stringify(this.listQuery))
       getLog(this.listQuery).then(response => {
         this.list = response.data.data.items
@@ -148,7 +155,7 @@ export default {
           })
         } else {
           this.$message({
-            message: '清理 ' + this.listQuery + ' 缓存任务提交失败 err :' + response.data.message,
+            message: '清理 ' + this.listQuery + ' 缓存任务提交失败 err :' + response.data.code,
             type: 'waring',
             // center: true,
             showClose: true
