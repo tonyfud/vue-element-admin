@@ -13,7 +13,7 @@ import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
 import mytableRouter from './modules/mytable' // 自定义的表格路由菜单
 
-/** note: submenu only apppear when children.length>=1
+/** note: Submenu only appear when children.length>=1
  *  detail see  https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
  **/
 
@@ -22,7 +22,7 @@ import mytableRouter from './modules/mytable' // 自定义的表格路由菜单
 * alwaysShow: true               if set true, will always show the root menu, whatever its child routes length
 *                                if not set alwaysShow, only more than one route under the children
 *                                it will becomes nested mode, otherwise not show the root menu
-* redirect: noredirect           if `redirect:noredirect` will no redirct in the breadcrumb
+* redirect: noredirect           if `redirect:noredirect` will no redirect in the breadcrumb
 * name:'router-name'             the name is used by <keep-alive> (must set!!!)
 * meta : {
     roles: ['admin','editor']     will control the page roles (you can set multiple roles)
@@ -33,12 +33,23 @@ import mytableRouter from './modules/mytable' // 自定义的表格路由菜单
 **/
 export const constantRouterMap = [
   {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path*',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
   },
   {
-    path: '/authredirect',
+    path: '/auth-redirect',
     component: () => import('@/views/login/authredirect'),
     hidden: true
   },
@@ -267,7 +278,7 @@ export const asyncRouterMap = [
       {
         path: 'export-selected-excel',
         component: () => import('@/views/excel/selectExcel'),
-        name: 'EelectExcel',
+        name: 'SelectExcel',
         meta: { title: 'selectExcel' }
       },
       {
@@ -339,6 +350,17 @@ export const asyncRouterMap = [
         component: () => import('@/views/i18n-demo/index'),
         name: 'I18n',
         meta: { title: 'i18n', icon: 'international' }
+      }
+    ]
+  },
+
+  {
+    path: 'external-link',
+    component: Layout,
+    children: [
+      {
+        path: 'https://github.com/PanJiaChen/vue-element-admin',
+        meta: { title: 'externalLink', icon: 'link' }
       }
     ]
   },

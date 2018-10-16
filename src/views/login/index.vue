@@ -5,10 +5,11 @@
 
       <div class="title-container">
         <h3 class="title">{{ $t('login.title') }}</h3>
+        <lang-select class="set-language"/>
       </div>
 
       <el-form-item prop="username">
-        <span class="svg-container svg-container_login">
+        <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
@@ -40,11 +41,11 @@
 
       <div class="tips">
         <span>{{ $t('login.username') }} : admin</span>
-        <!--<span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>-->
+        <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
       </div>
       <div class="tips">
         <span style="margin-right:18px;">{{ $t('login.username') }} : editor</span>
-        <!--<span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>-->
+        <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
       </div>
 
       <el-button class="thirdparty-button" type="primary" @click="showDialog=true">{{ $t('login.thirdparty') }}</el-button>
@@ -87,7 +88,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '000000'
+        password: '1111111'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -95,8 +96,18 @@ export default {
       },
       passwordType: 'password',
       loading: false,
-      showDialog: false
+      showDialog: false,
+      redirect: undefined
     }
+  },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
+    }
+
   },
   created() {
     // window.addEventListener('hashchange', this.afterQRScan)
@@ -118,7 +129,7 @@ export default {
           this.loading = true
           this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
             this.loading = false
-            this.$router.push({ path: '/' })
+            this.$router.push({ path: this.redirect || '/' })
           }).catch(() => {
             this.loading = false
           })
@@ -211,7 +222,8 @@ $light_gray:#eee;
     position: absolute;
     left: 0;
     right: 0;
-    width: 380px;
+    width: 520px;
+    max-width: 100%;
     padding: 35px 35px 15px 35px;
     margin: 120px auto;
   }
@@ -231,9 +243,6 @@ $light_gray:#eee;
     vertical-align: middle;
     width: 30px;
     display: inline-block;
-    &_login {
-      font-size: 20px;
-    }
   }
   .title-container {
     position: relative;
